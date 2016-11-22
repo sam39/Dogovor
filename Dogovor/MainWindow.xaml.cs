@@ -36,7 +36,8 @@ namespace Dogovor
             // если вылетим не этом этапе, приложение останется открытым
 
             document = application.Documents.Add(ref templatePathObj, ref missingObj, ref missingObj, ref missingObj);
-            Word._Document docnew = application.Documents.Add();
+            //Word._Document docnew = application.Documents.Add();
+            
             //{
             //    document = application.Documents.Add(ref templatePathObj, ref missingObj, ref missingObj, ref missingObj);
             //}
@@ -51,7 +52,7 @@ namespace Dogovor
             application.Visible = true;
 
             Word.Range bookmarkRange = document.Bookmarks["aaa"].Range;
-            bookmarkRange.Copy();
+            bookmarkRange.Delete();
 
         }
     }
