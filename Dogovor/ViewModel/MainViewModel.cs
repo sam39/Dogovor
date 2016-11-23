@@ -52,25 +52,7 @@ namespace Dogovor.ViewModel
 
         Word._Application application;
         Word._Document document;
-
-
-        private ObservableCollection<Signatory> _signatorys;
-        public ObservableCollection<Signatory> Signatorys
-        {
-            get
-            {
-                if (_signatorys == null)
-                {
-                    _signatorys = new ObservableCollection<Signatory>();
-                    _signatorys.Add(new Signatory {FIO = "Новоселов Владислав Аркадьевич", Id = "Signatory1" });
-                    _signatorys.Add(new Signatory { FIO = "Новоселов Эдуард Аркадьевич", Id = "Signatory2" });
-                    _signatorys.Add(new Signatory { FIO = "Крылов Владислав Леонидович", Id = "Signatory3" });
-                    _signatorys.Add(new Signatory { FIO = "Гераськин Ярослав Вячеславович", Id = "Signatory4" });
-                    _signatorys.Add(new Signatory { FIO = "Никитина Людмила Анатольевна", Id = "Signatory5" });
-                }
-                return _signatorys;
-            }
-        }      
+  
          
         private Contract _contract;
         public Contract Contract
@@ -169,9 +151,9 @@ namespace Dogovor.ViewModel
 
             if (Contract.Signatory != null)
             {
-                switch (Contract.Signatory.Id)
+                switch (Contract.Signatory)
                 {
-                    case "Signatory1":
+                    case Signatory.Новоселов_В_А:
                         DelBookmark("Signatory2");
                         DelBookmark("Dover2");
                         DelBookmark("Sign2");
@@ -185,7 +167,7 @@ namespace Dogovor.ViewModel
                         DelBookmark("Dover5");
                         DelBookmark("Sign5");
                         break;
-                    case "Signatory2":
+                    case Signatory.Новоселов_Э_А:
                         DelBookmark("Signatory1");
                         DelBookmark("Dover1");
                         DelBookmark("Sign1");
@@ -199,7 +181,7 @@ namespace Dogovor.ViewModel
                         DelBookmark("Dover5");
                         DelBookmark("Sign5");
                         break;
-                    case "Signatory3":
+                    case Signatory.Крылов_В_Л:
                         DelBookmark("Signatory1");
                         DelBookmark("Dover1");
                         DelBookmark("Sign1");
@@ -213,7 +195,7 @@ namespace Dogovor.ViewModel
                         DelBookmark("Dover5");
                         DelBookmark("Sign5");
                         break;
-                    case "Signatory4":
+                    case Signatory.Гераськин_Я_В:
                         DelBookmark("Signatory1");
                         DelBookmark("Dover1");
                         DelBookmark("Sign1");
@@ -227,7 +209,7 @@ namespace Dogovor.ViewModel
                         DelBookmark("Dover5");
                         DelBookmark("Sign5");
                         break;
-                    case "Signatory5":
+                    case Signatory.Никитина_Л_А:
                         DelBookmark("Signatory1");
                         DelBookmark("Dover1");
                         DelBookmark("Sign1");
@@ -275,8 +257,6 @@ namespace Dogovor.ViewModel
 
         public void ExecuteSaveCommand()
         {
-            //Contract.VozmRash = false;
-            //RaisePropertyChanged<Contract>("VozmRash");
             Contract.save();
         }
 

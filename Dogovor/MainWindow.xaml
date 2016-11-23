@@ -34,35 +34,49 @@
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
 
+        <ObjectDataProvider x:Key="dataFromEnumSignatory" MethodName="GetValues"
+                        ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:Signatory"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
     </Window.Resources>
 
-
-
-
     <Grid x:Name="LayoutRoot">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="54*"/>
-            <ColumnDefinition Width="19*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.ColumnSpan="2">
-            <Button Command="{Binding Save}" x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Height="48" Margin="66,10,0,0" VerticalAlignment="Top" Width="152"/>
-            <Button Command="{Binding Start}" x:Name="button" Content="Старт!" HorizontalAlignment="Left" Height="48" Margin="66,10,0,0" VerticalAlignment="Top" Width="152"/>
-            <TextBox x:Name="tbTemplatePath" Text="{Binding Contract.TemplatePath, Mode=TwoWay}"></TextBox>
-            <Button x:Name="btnTemplatePath" Content="..." Command="{Binding SetTemplate}"/>
-            <TextBox Text="{Binding Contract.Num}"/>
-            <DatePicker SelectedDate="{Binding Contract.Date}"></DatePicker>
-            <ComboBox SelectedItem="{Binding Contract.Currency}" ItemsSource="{Binding Source={StaticResource dataFromEnumCurrency}}"></ComboBox>
-            <ComboBox SelectedItem="{Binding Contract.CustomerStatus}" ItemsSource="{Binding Source={StaticResource dataFromEnumStatus}}"></ComboBox>
-            <ComboBox SelectedItem="{Binding Contract.Payment}" ItemsSource="{Binding Source={StaticResource dataFromEnumPayment}}"></ComboBox>
-            <ComboBox ItemsSource="{Binding Signatorys}" DisplayMemberPath="FIO" SelectedValuePath="Id" SelectedItem="{Binding Contract.Signatory}"></ComboBox>
-            <TextBlock>Отчет</TextBlock>
-            <CheckBox IsChecked="{Binding Path=Contract.Report}"/>
-            <TextBlock>Этапы</TextBlock>
-            <CheckBox IsChecked="{Binding Path=Contract.Steps}"/>
-            <TextBlock>eRoom</TextBlock>
-            <CheckBox IsChecked="{Binding Path=Contract.Eroom}"/>
-            <TextBlock>Возмещаемые расходы</TextBlock>
-            <CheckBox IsChecked="{Binding Path=Contract.VozmRash}"/>
+        <StackPanel>
+            <Button Command="{Binding Save}" x:Name="btnSave" Content="Сохранить" HorizontalAlignment="Center"  Height="48" Margin="0,10,0,0" VerticalAlignment="Top" Width="152"/>
+            <Button Command="{Binding Start}" x:Name="button" Content="Старт!" HorizontalAlignment="Center" Height="48" Margin="0,10,0,5" VerticalAlignment="Top" Width="152"/>
+            <StackPanel Margin="10,5,10,5" Width="Auto" Orientation="Horizontal" >
+                <TextBlock VerticalAlignment="Center">Шаблон:</TextBlock>
+                <TextBox Margin="5" MinWidth="170" Width="Auto" x:Name="tbTemplatePath" Text="{Binding Contract.TemplatePath, Mode=TwoWay}"/>
+                <Button HorizontalAlignment="Right"  Margin="5" Width="25"  x:Name="btnTemplatePath" Content="..." Command="{Binding SetTemplate}"/>
+            </StackPanel>
+            <StackPanel Margin="10,5,10,5" Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center">№:</TextBlock>
+                <TextBox Margin="5,5,10,5" Width="95" Text="{Binding Contract.Num}"/>
+                <TextBlock VerticalAlignment="Center">Дата:</TextBlock>                
+                <DatePicker Margin="5,5,10,5" Width="95" SelectedDate="{Binding Contract.Date}"></DatePicker>
+            </StackPanel>
+            <ComboBox Margin="10,5,10,5" SelectedItem="{Binding Contract.Currency}" ItemsSource="{Binding Source={StaticResource dataFromEnumCurrency}}"></ComboBox>
+            <ComboBox Margin="10,5,10,5" SelectedItem="{Binding Contract.CustomerStatus}" ItemsSource="{Binding Source={StaticResource dataFromEnumStatus}}"></ComboBox>
+            <ComboBox Margin="10,5,10,5" SelectedItem="{Binding Contract.Payment}" ItemsSource="{Binding Source={StaticResource dataFromEnumPayment}}"></ComboBox>
+            <ComboBox Margin="10,5,10,5" SelectedItem="{Binding Contract.Signatory}" ItemsSource="{Binding Source={StaticResource dataFromEnumSignatory}}"></ComboBox>
+            <StackPanel  Margin="10,5,10,5" Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding Path=Contract.Report}"/>
+                <TextBlock Margin="10,0,0,0">Отчет</TextBlock>                
+            </StackPanel>
+            <StackPanel  Margin="10,5,10,5" Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding Path=Contract.Steps}"/>
+                <TextBlock Margin="10,0,0,0">Этапы</TextBlock>                
+            </StackPanel>
+            <StackPanel  Margin="10,5,10,5" Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding Path=Contract.Eroom}"/>
+                <TextBlock Margin="10,0,0,0">eRoom</TextBlock>                
+            </StackPanel>
+            <StackPanel  Margin="10,5,10,5" Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding Path=Contract.VozmRash}"/>
+                <TextBlock Margin="10,0,0,0">Возмещаемые расходы</TextBlock>                
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

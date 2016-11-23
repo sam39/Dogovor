@@ -11,7 +11,7 @@ namespace Dogovor.Model
     public enum Status { Резидент, Нерезидент};
     public enum Currency { Рубль, Доллар }
     public enum Payment {Фиксированное, По_ставкам}
-    
+    public enum Signatory {Новоселов_В_А, Новоселов_Э_А, Крылов_В_Л, Гераськин_Я_В, Никитина_Л_А }
 
     public class Contract
     {
