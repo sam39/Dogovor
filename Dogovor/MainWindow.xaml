@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Dogovor.Model"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d ignore"
-        Height="331"
+        Height="500"
         Width="300"
         Title="Договор"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
@@ -45,13 +45,16 @@
             <ColumnDefinition Width="19*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.ColumnSpan="2">
+            <Button Command="{Binding Save}" x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Height="48" Margin="66,10,0,0" VerticalAlignment="Top" Width="152"/>
             <Button Command="{Binding Start}" x:Name="button" Content="Старт!" HorizontalAlignment="Left" Height="48" Margin="66,10,0,0" VerticalAlignment="Top" Width="152"/>
+            <TextBox x:Name="tbTemplatePath" Text="{Binding Contract.TemplatePath, Mode=TwoWay}"></TextBox>
+            <Button x:Name="btnTemplatePath" Content="..." Command="{Binding SetTemplate}"/>
             <TextBox Text="{Binding Contract.Num}"/>
             <DatePicker SelectedDate="{Binding Contract.Date}"></DatePicker>
             <ComboBox SelectedItem="{Binding Contract.Currency}" ItemsSource="{Binding Source={StaticResource dataFromEnumCurrency}}"></ComboBox>
             <ComboBox SelectedItem="{Binding Contract.CustomerStatus}" ItemsSource="{Binding Source={StaticResource dataFromEnumStatus}}"></ComboBox>
             <ComboBox SelectedItem="{Binding Contract.Payment}" ItemsSource="{Binding Source={StaticResource dataFromEnumPayment}}"></ComboBox>
-            <ComboBox SelectedItem="{Binding Contract.Signatory}" DisplayMemberPath="FIO" SelectedValuePath="Id" ItemsSource="{Binding Signatorys}"></ComboBox>
+            <ComboBox ItemsSource="{Binding Signatorys}" DisplayMemberPath="FIO" SelectedValuePath="Id" SelectedItem="{Binding Contract.Signatory}"></ComboBox>
             <TextBlock>Отчет</TextBlock>
             <CheckBox IsChecked="{Binding Path=Contract.Report}"/>
             <TextBlock>Этапы</TextBlock>

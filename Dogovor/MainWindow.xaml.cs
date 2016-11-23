@@ -2,6 +2,7 @@
 using Dogovor.ViewModel;
 using Word = Microsoft.Office.Interop.Word;
 using System.Reflection;
+using System;
 
 namespace Dogovor
 {
@@ -54,6 +55,32 @@ namespace Dogovor
             Word.Range bookmarkRange = document.Bookmarks["aaa"].Range;
             bookmarkRange.Delete();
 
+        }
+
+        private void btnTemplatePath_Click(object sender, RoutedEventArgs e)
+        {
+            //// Create OpenFileDialog 
+            //Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+
+
+            //// Set filter for file extension and default file extension 
+            //dlg.DefaultExt = ".png";
+            //dlg.Filter = "Word Files (*.doc)|*.doc|MS Word Files (*.docx)|*.docx";
+
+
+            //// Display OpenFileDialog by calling ShowDialog method 
+            //Nullable<bool> result = dlg.ShowDialog();
+
+
+            //// Get the selected file name and display in a TextBox 
+            //if (result == true)
+            //{
+            //    // Open document 
+            //    string filename = dlg.FileName;
+            //    tbTemplatePath.Text = filename;
+                
+            //}
         }
     }
 }

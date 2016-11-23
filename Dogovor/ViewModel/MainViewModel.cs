@@ -77,13 +77,15 @@ namespace Dogovor.ViewModel
         {
             get
             {
-                if (_contract == null) _contract = new Contract { Currency = Currency.Доллар, Report = true, Date = DateTime.Now };
+                if (_contract == null)
+                    _contract = Contract.read();
+                _contract.Date = DateTime.Now;
                 return _contract;
-
             }
-            set
-            {
-            }
+            //set
+            //{
+            //    _contract = value;
+            //}
                 
         }
 
@@ -106,7 +108,7 @@ namespace Dogovor.ViewModel
                 });
         }
 
-        #region Выбор должности
+        #region Команда Start
         RelayCommand _start;
         public ICommand Start
         {
@@ -129,7 +131,7 @@ namespace Dogovor.ViewModel
             //создаем обьект приложения word
             application = new Word.Application();
             // создаем путь к файлу
-            object templatePathObj = "D:\\tmp\\test.docx"; ;
+            object templatePathObj = Contract.TemplatePath;
 
             // если вылетим не этом этапе, приложение останется открытым
 
@@ -245,9 +247,11 @@ namespace Dogovor.ViewModel
 
         public bool CanExecuteStartCommand()
         {
-            return true;
+            if (Contract.TemplatePath != String.Empty)
+                return true;
+            else return false;
         }
-        #endregion Выбор должности
+        #endregion Команда Start
 
         private void DelBookmark(string bookmark)
         {
@@ -257,7 +261,75 @@ namespace Dogovor.ViewModel
         }
 
 
+        #region Команда Save
+        RelayCommand _save;
+        public ICommand Save
+        {
+            get
+            {
+                if (_save == null)
+                    _save = new RelayCommand(ExecuteSaveCommand, CanExecuteSaveCommand);
+                return _save;
+            }
+        }
 
+        public void ExecuteSaveCommand()
+        {
+            //Contract.VozmRash = false;
+            //RaisePropertyChanged<Contract>("VozmRash");
+            Contract.save();
+        }
+
+        public bool CanExecuteSaveCommand()
+        {
+            return true;
+        }
+        #endregion Команда Save
+
+
+        #region Команда SetTemplate
+        RelayCommand _setTemplate;
+        public ICommand SetTemplate
+        {
+            get
+            {
+                if (_setTemplate == null)
+                    _setTemplate = new RelayCommand(ExecuteSetTemplateCommand, CanExecuteSetTemplateCommand);
+                return _setTemplate;
+            }
+        }
+
+        public void ExecuteSetTemplateCommand()
+        {
+            // Create OpenFileDialog 
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+
+
+            // Set filter for file extension and default file extension 
+            dlg.DefaultExt = ".docx";
+            dlg.Filter = "Word Files (*.doc)|*.doc|MS Word Files (*.docx)|*.docx";
+
+
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dlg.ShowDialog();
+
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                // Open document 
+                string filename = dlg.FileName;
+                Contract.TemplatePath = filename;
+                RaisePropertyChanged(() => Contract);
+            }
+        }
+
+        public bool CanExecuteSetTemplateCommand()
+        {
+            return true;
+        }
+        #endregion Команда SetTemplate
 
 
         ////public override void Cleanup()
